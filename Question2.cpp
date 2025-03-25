@@ -6,33 +6,12 @@
 #include <tuple>
 
 using namespace std;
-//-------Constants and Function Declarations-------//
+
 const char BLANK = '⊔';
 const int MAX_STEPS = 1000;
-int safeBinaryToInt(const string& binary);
-string simulateTuringMachine(const string& transitionTable, const string& input);
 
 unordered_map<string, char> reverseEncoding = {{"00", '0'}, {"01", '1'}, {"10", '#'}, {"11", ';'}};
 
-
-
-
-
-
-//--------Main Function--------//
-int main() {
-    string tt, input;
-    getline(cin, tt);
-    getline(cin, input);
-    cout << simulateTuringMachine(tt, input) << endl;
-    return 0;
-}
-
-
-
-
-
-///--------------External Functions--------------///
 int safeBinaryToInt(const string& binary) {
     if (binary.empty()) return -1;
     for (char c : binary) {
@@ -45,12 +24,7 @@ int safeBinaryToInt(const string& binary) {
     }
 }
 
-
-
-
-
-
-string Run(const string& transitionTable, const string& input) {
+string simulateTuringMachine(const string& transitionTable, const string& input) {
     string decoded;
     for (size_t i = 0; i < transitionTable.size(); i += 2) {
         if (i + 1 >= transitionTable.size()) return "Error";
@@ -90,15 +64,9 @@ string Run(const string& transitionTable, const string& input) {
         transitions[to_string(fromState) + "_" + currSym] = {toState, newSym, dir};
     }
 
-
-
-
     string tape = string(1, BLANK) + input + string(1, BLANK);
     int head = 1, state = 0, step = 0;
 
-
-
-    
     while (step++ < MAX_STEPS) {
         char currSym = tape[head];
         string key = to_string(state) + "_" + currSym;
@@ -121,6 +89,14 @@ string Run(const string& transitionTable, const string& input) {
         if (state == 1) return "Accept";
         if (state == 2) return "Reject";
     }
-//Test workflow
+
     return "Error";
+}
+
+int main() {
+    string tt, input;
+    getline(cin, tt);
+    getline(cin, input);
+    cout << simulateTuringMachine(tt, input) << endl;
+    return 0;
 }
