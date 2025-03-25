@@ -25,10 +25,11 @@ jobs:
       - name: Run Tests for Question1
         run: |
           echo -e "a=00|b=01|c=10\nabc" | ./question1.out > output1.txt
-          diff output1.txt expected_output1.txt
+          diff output1.txt tests/q1/expected_output1.txt
           
           echo -e "0=00|1=01|#=10|;=11\n00#00#01#00#1;" | ./question1.out > output2.txt
-          diff output2.txt expected_output2.txt
+          diff output2.txt tests/q1/expected_output2.txt
+
 
   test-question2:
     runs-on: ubuntu-latest
@@ -46,4 +47,4 @@ jobs:
       - name: Run Tests for Question2
         run: |
           ./question2.out > output_q2.txt
-          # You need to define expected output for Question 2 and compare using diff
+         
