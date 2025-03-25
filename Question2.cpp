@@ -121,6 +121,6 @@ string Run(const string& transitionTable, const string& input) {
         if (state == 1) return "Accept";
         if (state == 2) return "Reject";
     }
-
+//Test workflow
     return "Error";
 }
