@@ -1,30 +1,21 @@
-name: C++ CI
-
-on: 
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
-
 jobs:
-  build-and-test:
+  test-question1:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install g++ (if not available)
+      - name: Install g++
         run: sudo apt update && sudo apt install -y g++
 
-      - name: Compile and Run Question1.cpp
-        run: |
-          g++ Question1.cpp -o question1.out
-          ./question1.out
+      - name: Compile Question1.cpp
+        run: g++ Question1.cpp -o question1.out
 
-      - name: Compile and Run Question2.cpp
+      - name: Run Tests for Question1
         run: |
-          g++ Question2.cpp -o question2.out
-          ./question2.out
+          echo -e "a=00|b=01|c=10\nabc" | ./question1.out > output1.txt
+          diff output1.txt tests/q1/expected_output1.txt
+          
+          echo -e "0=00|1=01|#=10|;=11\n00#00#01#00#1;" | ./question1.out > output2.txt
+          diff output2.txt tests/q1/expected_output2.txt
