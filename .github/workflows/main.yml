@@ -3,7 +3,7 @@ name: C++ Tests
 on: [push, pull_request]
 
 jobs:
-  test:
+  Compilation_Tests:
     runs-on: ubuntu-latest
 
     steps:
