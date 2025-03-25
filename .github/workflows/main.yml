@@ -1,11 +1,10 @@
-name: C++ Tests
+name: C++ Build Tests
 
 on: [push, pull_request]
 
 jobs:
-  Compilation_Tests:
+  build-test-question1:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
@@ -16,21 +15,14 @@ jobs:
       - name: Compile Question1
         run: g++ Question1.cpp -o question1.out
 
+  build-test-question2:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Install g++
+        run: sudo apt-get install g++
+
       - name: Compile Question2
         run: g++ Question2.cpp -o question2.out
-
-    ##  - name: Run Tests for Question1
-      #  run: |
-    #      ./question1.out < tests/q1/sample_in1.txt > output1.txt
-     #    diff -w output1.txt tests/q1/expected_output1.txt
-          
-      #    ./question1.out < tests/q1/sample_in2.txt > output2.txt
-       #   diff -w output2.txt tests/q1/expected_output2.txt
-
-  ##   - name: Run Tests for Question2
-    #    run: |
-     #     ./question2.out < tests/q2/sample_in1.txt > output3.txt
-      #    diff -w output3.txt tests/q2/expected_output1.txt
-       #   
-        #  ./question2.out < tests/q2/sample_in2.txt > output4.txt
-         # diff -w output4.txt tests/q2/expected_output2.txt
